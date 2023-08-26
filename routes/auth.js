@@ -5,6 +5,7 @@ const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const fetchuser = require('../middlewares/fetchuser');
+require('dotenv').config();
 const JWT_secret = process.env.JWT_secret;
 
 
@@ -101,6 +102,7 @@ router.post('/login',[body('email').isEmail(),body('password','Password is Inval
 
 router.post('/getuser',fetchuser,async(req,res)=>{
     try{
+        console.log("hello i am listing");
         const user  = await User.findById(req.user.id).select({password:0});
         res.send(user);
     }
